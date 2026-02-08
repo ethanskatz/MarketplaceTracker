@@ -4,7 +4,9 @@ import os
 
 from apify_client import ApifyClient
 from dotenv import load_dotenv
+from fetchers.base_fetcher import BaseFetcher
 
+del BaseFetcher
 load_dotenv()
 
 APIFY_KEY = os.getenv("APIFY_KEY")
@@ -18,7 +20,7 @@ def main() -> None:
     run_input = {
         "startUrls": [
             {
-                "url": "https://www.facebook.com/marketplace/prague/home-improvements",
+                "url": "https://www.facebook.com/marketplace/la/gr86",
             },
             {
                 "url": "https://www.facebook.com/marketplace/prague/search/?query=apartment",

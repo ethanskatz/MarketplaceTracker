@@ -1,4 +1,4 @@
-"""Docstring for marketcheck_api"""
+"""Docstring for marketcheck_api."""
 
 import os
 
