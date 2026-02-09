@@ -2,14 +2,12 @@
 
 from abc import ABC, abstractmethod
 
-from app.utils import Listing
-
 
 class BaseFetcher(ABC):
     """Base Class for content fetchers."""
 
     def __init__(self, api_key: str) -> None:
-        """Docstring for __init__.
+        """Create instance of .
 
         :param self: Description
         :param api_key: Description
@@ -18,19 +16,31 @@ class BaseFetcher(ABC):
         self.api_key = api_key
 
     @abstractmethod
-    def get_listings(self, query, count: int | None = None) -> list[Listing]:
-        """Docstring for get_listings.
+    def get_listings(
+        self,
+        *,
+        make: str,
+        model: str,
+        year: tuple[int, int] | int | None = None,
+    ) -> list:
+        """Get listings matching specified parameters.
 
         :param self: Description
         :return: Description
         :rtype: list[Listing]
         """
 
+    @staticmethod
     @abstractmethod
-    def _build_query(**kwargs) -> str:
+    def _build_query(**queryargs: dict[str, str]) -> str:
         """Docstring for build_query.
 
         :param kwargs: Description
         :return: Query containing xyz.
         :rtype: str
         """
+
+    @staticmethod
+    @abstractmethod
+    def _parse_response(self, response: str):
+        pass
