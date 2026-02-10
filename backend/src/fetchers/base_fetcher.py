@@ -2,9 +2,7 @@
 
 from abc import ABC, abstractmethod
 
-import requests
-
-from backend.app.utils import Listing, SearchParams
+from src.utils import Listing, SearchParams
 
 
 class BaseFetcher(ABC):
@@ -18,7 +16,6 @@ class BaseFetcher(ABC):
         :type api_key: str
         """
         self.api_key = api_key
-        self.session = requests.Session()
 
     @abstractmethod
     def get_listings(self, parameters: SearchParams) -> list[Listing]:
@@ -32,7 +29,7 @@ class BaseFetcher(ABC):
 
     @staticmethod
     @abstractmethod
-    def _build_query(**queryargs: dict[str, str]) -> str:
+    def _build_query(parameters: SearchParams) -> dict[str, str]:
         """Docstring for build_query.
 
         :param kwargs: Description
@@ -43,4 +40,12 @@ class BaseFetcher(ABC):
 
     @staticmethod
     @abstractmethod
-    def _parse_response(self, response: str): ...
+    def _parse_response(response: str) -> list[Listing]:
+        """Docstring for _parse_response.
+
+        :param response: Description
+        :type response: str
+        :return: Description
+        :rtype: list[Listing]
+        """
+        ...

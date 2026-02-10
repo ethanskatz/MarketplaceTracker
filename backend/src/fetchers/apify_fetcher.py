@@ -1,15 +1,8 @@
 """Docstring for apify_api."""
 
-import os
-
 from apify_client import ApifyClient
-from dotenv import load_dotenv
-from fetchers.base_fetcher import BaseFetcher
 
-del BaseFetcher
-load_dotenv()
-
-APIFY_KEY = os.getenv("APIFY_KEY")
+from src.fetchers.base_fetcher import BaseFetcher
 
 
 def main() -> None:
@@ -20,10 +13,10 @@ def main() -> None:
     run_input = {
         "startUrls": [
             {
-                "url": "https://www.facebook.com/marketplace/la/gr86",
+                "url": "https://www.facebook.com/marketplace/la/?query=gr86",
             },
             {
-                "url": "https://www.facebook.com/marketplace/prague/search/?query=apartment",
+                "url": "https://www.facebook.com/marketplace/la/search/?query=mr2",
             },
         ],
         "resultsLimit": 20,
@@ -34,3 +27,8 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+
+class ApifyFetcher(BaseFetcher):
+    def __init__(self, api_key: str) -> None:
+        super().__init__(api_key)
