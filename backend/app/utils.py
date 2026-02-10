@@ -1,25 +1,24 @@
-"""Docstring for utils."""
+"""Helper modules for backend"""
 
 from dataclasses import dataclass
 
-# import os, sys  # noqa: ERA001
 
-
-@dataclass
+@dataclass(frozen=True)
 class Listing:
     """Data class for Listing."""
 
-    def __init__(self, d: int) -> None:
-        """Docstring for __init__.
+    make: str
+    model: str
+    year: int
+    zipcode: int
+    radius: float | None
 
-        :param self: Description
-        :param d: Description
-        :type d: int
-        """
 
-    def do_this(self) -> int:
-        """Docstring for do_this.
+@dataclass(frozen=True)
+class SearchParams:
+    """Docstring for SearchParams."""
 
-        :return: param containing xyz
-        """
-        return 1
+    make: str
+    model: str
+    year: tuple[int, int] | int | None = None
+    price: tuple[int, int] | None = None

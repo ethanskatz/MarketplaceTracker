@@ -1,7 +1,8 @@
 import os
 
 from dotenv import load_dotenv
-from fetchers.auto_dev_fetcher import AutoDevFetcher
+
+from backend.app.fetchers.auto_dev_fetcher import AutoDevFetcher
 
 if __name__ == "__main__":
     load_dotenv()

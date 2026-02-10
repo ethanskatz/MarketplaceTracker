@@ -2,6 +2,10 @@
 
 from abc import ABC, abstractmethod
 
+import requests
+
+from backend.app.utils import Listing, SearchParams
+
 
 class BaseFetcher(ABC):
     """Base Class for content fetchers."""
@@ -14,21 +18,17 @@ class BaseFetcher(ABC):
         :type api_key: str
         """
         self.api_key = api_key
+        self.session = requests.Session()
 
     @abstractmethod
-    def get_listings(
-        self,
-        *,
-        make: str,
-        model: str,
-        year: tuple[int, int] | int | None = None,
-    ) -> list:
+    def get_listings(self, parameters: SearchParams) -> list[Listing]:
         """Get listings matching specified parameters.
 
         :param self: Description
         :return: Description
         :rtype: list[Listing]
         """
+        ...
 
     @staticmethod
     @abstractmethod
@@ -39,8 +39,8 @@ class BaseFetcher(ABC):
         :return: Query containing xyz.
         :rtype: str
         """
+        ...
 
     @staticmethod
     @abstractmethod
-    def _parse_response(self, response: str):
-        pass
+    def _parse_response(self, response: str): ...

@@ -3,7 +3,8 @@
 from typing import Any
 
 import requests
-from fetchers.base_fetcher import BaseFetcher
+
+from backend.app.fetchers.base_fetcher import BaseFetcher
 
 
 class AutoDevFetcher(BaseFetcher):
@@ -43,7 +44,7 @@ class AutoDevFetcher(BaseFetcher):
         return response.text
 
     @staticmethod
-    def _build_query(kwargs: dict) -> str:
+    def _build_query(kwargs: dict[str, Any]) -> str:
         query_arr: list[str] = []
         for key, val in kwargs.items():
             if val:
@@ -56,9 +57,3 @@ class AutoDevFetcher(BaseFetcher):
     def _parse_response(response: str) -> str:
 
         return "Hello World!"
-
-
-if __name__ == "__main__":
-    fetcher = AutoDevFetcher(api_key=api_key)
-
-    print(fetcher.get_listings(make="toyota", model="gr86"))
